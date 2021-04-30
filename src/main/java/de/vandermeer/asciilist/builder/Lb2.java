@@ -4,11 +4,11 @@ import de.vandermeer.asciilist.AsciiList;
 
 public class Lb2<L extends AsciiList<?, ?, ?>> {
 
-	public L get(){
-		return null;
-	}
+    public L get() {
+        return null;
+    }
 
-	void setParent(Lb2<?> parent){
-		
-	}
+    void setParent(Lb2<?> parent) {
+
+    }
 }

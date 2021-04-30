@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,32 +22,33 @@ import de.vandermeer.translation.targets.Text2Latex;
  * Collection of themes for an {@link DescriptionList}.
  * Simply use the {@link DescriptionList#applyTheme(DescriptionListTheme)} method and render it.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.5 build 170502 (02-May-17) for Java 1.8
- * @since      v0.1.0
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.5 build 170502 (02-May-17) for Java 1.8
+ * @since v0.1.0
  */
 public interface Dl_Themes {
 
-	/**
-	 * A theme for LaTeX target.
-	 * @return the theme
-	 */
-	static DescriptionListTheme latex(){
-		return new DescriptionListTheme() {
-			@Override
-			public void apply(DescriptionListContext ctx) {
-				ctx.setTargetTranslator(new Text2Latex());
-				ctx.setListStart("\\begin{description}");
-				ctx.setListEnd("\\end{description}");
-				ctx.setLeftLabelString("\\item[");
-				ctx.setRightLabelString("]");
-				ctx.setItemMargin(4);
-				ctx.setLabelRightMargin(0);
-				ctx.setTextLeftMargin(1);
-				ctx.setAlignment(TextAlignment.LEFT);
-				ctx.setUseSameLine(true);
-			}
-		};
-	}
+    /**
+     * A theme for LaTeX target.
+     *
+     * @return the theme
+     */
+    static DescriptionListTheme latex() {
+        return new DescriptionListTheme() {
+            @Override
+            public void apply(DescriptionListContext ctx) {
+                ctx.setTargetTranslator(new Text2Latex());
+                ctx.setListStart("\\begin{description}");
+                ctx.setListEnd("\\end{description}");
+                ctx.setLeftLabelString("\\item[");
+                ctx.setRightLabelString("]");
+                ctx.setItemMargin(4);
+                ctx.setLabelRightMargin(0);
+                ctx.setTextLeftMargin(1);
+                ctx.setAlignment(TextAlignment.LEFT);
+                ctx.setUseSameLine(true);
+            }
+        };
+    }
 
 }

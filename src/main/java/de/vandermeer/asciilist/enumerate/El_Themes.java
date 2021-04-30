@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,31 +22,32 @@ import de.vandermeer.translation.targets.Text2Latex;
  * Collection of themes for an {@link EnumerateList}.
  * Simply use the {@link EnumerateList#applyTheme(EnumerateListTheme)} method and render it.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.5 build 170502 (02-May-17) for Java 1.8
- * @since      v0.1.0
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.5 build 170502 (02-May-17) for Java 1.8
+ * @since v0.1.0
  */
 public interface El_Themes {
 
-	/**
-	 * A theme for LaTeX target.
-	 * @return the theme
-	 */
-	static EnumerateListTheme latex(){
-		return new EnumerateListTheme() {
-			@Override
-			public void apply(EnumerateListContext ctx) {
-				ctx.setTargetTranslator(new Text2Latex());
-				ctx.setListStart("\\begin{enumerate}");
-				ctx.setListEnd("\\end{enumerate}");
-				ctx.setStyle(A7_EnumerateLists.blank());
-				ctx.setLeftLabelString("\\item");
-				ctx.setItemMargin(4);
-				ctx.setLabelRightMargin(0);
-				ctx.setTextLeftMargin(0);
-				ctx.setSeparatorAfterLastNumber(false);
-			}
-		};
-	}
+    /**
+     * A theme for LaTeX target.
+     *
+     * @return the theme
+     */
+    static EnumerateListTheme latex() {
+        return new EnumerateListTheme() {
+            @Override
+            public void apply(EnumerateListContext ctx) {
+                ctx.setTargetTranslator(new Text2Latex());
+                ctx.setListStart("\\begin{enumerate}");
+                ctx.setListEnd("\\end{enumerate}");
+                ctx.setStyle(A7_EnumerateLists.blank());
+                ctx.setLeftLabelString("\\item");
+                ctx.setItemMargin(4);
+                ctx.setLabelRightMargin(0);
+                ctx.setTextLeftMargin(0);
+                ctx.setSeparatorAfterLastNumber(false);
+            }
+        };
+    }
 
 }

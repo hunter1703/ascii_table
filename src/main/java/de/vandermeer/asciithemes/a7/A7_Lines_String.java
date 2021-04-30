@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,24 +19,24 @@ import de.vandermeer.asciithemes.TA_Line_String;
 
 /**
  * Collection of {@link TA_Line_String} for ASCII characters.
- * 
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 170404 (04-Apr-17) for Java 1.8
- * @since      v0.0.1
+ *
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.1 build 170404 (04-Apr-17) for Java 1.8
+ * @since v0.0.1
  */
 public abstract class A7_Lines_String {
 
-	/**
-	 * A line using the string `+-`.
-	 * 
-	 * ----
-	 * +-+-+-+-+-
-	 * ----
-	 * 
-	 * @return the line
-	 */
-	public static TA_Line_String plusminus(){
-		return TA_Line_String.create("+-", "line using the string \"+-\"");
-	}
+    /**
+     * A line using the string `+-`.
+     * <p>
+     * ----
+     * +-+-+-+-+-
+     * ----
+     *
+     * @return the line
+     */
+    public static TA_Line_String plusminus() {
+        return TA_Line_String.create("+-", "line using the string \"+-\"");
+    }
 
 }

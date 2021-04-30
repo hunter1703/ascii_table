@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,40 +15,42 @@
 
 package de.vandermeer.skb.interfaces.strategies.collections.queue;
 
+import de.vandermeer.skb.interfaces.strategies.collections.IsQueueStrategy;
+
 import java.util.Collection;
 import java.util.concurrent.PriorityBlockingQueue;
-
-import de.vandermeer.skb.interfaces.strategies.collections.IsQueueStrategy;
 
 /**
  * Strategy for a priority blocking queue.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.0.1
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.0.1
  */
 public interface PriorityBlockingQueueStrategy<T> extends IsQueueStrategy<PriorityBlockingQueue<T>, T> {
 
-	@Override
-	default PriorityBlockingQueue<T> get(Collection<T> collection) {
-		PriorityBlockingQueue<T> ret = new PriorityBlockingQueue<T>();
-		if(collection!=null){
-			ret.addAll(collection);
-		}
-		return ret;
-	}
+    /**
+     * Creates a new priority blocking queue strategy.
+     *
+     * @param <T> type for the objects in the queue
+     * @return new priority blocking queue strategy
+     */
+    static <T> PriorityBlockingQueueStrategy<T> create() {
+        return new PriorityBlockingQueueStrategy<T>() {
+        };
+    }
 
-	@Override
-	default PriorityBlockingQueue<T> get() {
-		return new PriorityBlockingQueue<T>();
-	}
+    @Override
+    default PriorityBlockingQueue<T> get(Collection<T> collection) {
+        PriorityBlockingQueue<T> ret = new PriorityBlockingQueue<T>();
+        if (collection != null) {
+            ret.addAll(collection);
+        }
+        return ret;
+    }
 
-	/**
-	 * Creates a new priority blocking queue strategy.
-	 * @param <T> type for the objects in the queue
-	 * @return new priority blocking queue strategy
-	 */
-	static <T> PriorityBlockingQueueStrategy<T> create(){
-		return new PriorityBlockingQueueStrategy<T>(){};
-	}
+    @Override
+    default PriorityBlockingQueue<T> get() {
+        return new PriorityBlockingQueue<T>();
+    }
 }

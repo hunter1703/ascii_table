@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,46 +15,48 @@
 
 package de.vandermeer.skb.interfaces.transformers;
 
-import java.util.Collection;
-
+import de.vandermeer.skb.interfaces.strategies.IsCollectionStrategy;
 import org.apache.commons.lang3.Validate;
 
-import de.vandermeer.skb.interfaces.strategies.IsCollectionStrategy;
+import java.util.Collection;
 
 /**
  * Transforms input provided by an `iterable` into a collection of given type.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.0.1
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.0.1
  */
 public interface Iterable_To_Collection extends IsTransformer<Iterable<?>, Collection<?>> {
 
-	/**
-	 * Converts an `iterable` into a collection of given type.
-	 * @param <T> type of the objects in the returned collection
-	 * @param <S> type of the returned collection
-	 * @param input the `iterable` to convert
-	 * @param strategy the strategy determining the output collection type
-	 * @return an empty collection or a collection of with all input elements
-	 * @throws NullPointerException if any argument was null
-	 */
-	default <T, S extends Collection<T>> S transform(Iterable<T> input, IsCollectionStrategy<S, T> strategy) {
-		Validate.notNull(input);
-		Validate.notNull(strategy);
+    /**
+     * Creates a new transformer.
+     *
+     * @return new transformer
+     */
+    static Iterable_To_Collection create() {
+        return new Iterable_To_Collection() {
+        };
+    }
 
-		S ret = strategy.get();
-		for(T t : input){
-			ret.add(t);
-		}
-		return ret;
-	}
+    /**
+     * Converts an `iterable` into a collection of given type.
+     *
+     * @param <T>      type of the objects in the returned collection
+     * @param <S>      type of the returned collection
+     * @param input    the `iterable` to convert
+     * @param strategy the strategy determining the output collection type
+     * @return an empty collection or a collection of with all input elements
+     * @throws NullPointerException if any argument was null
+     */
+    default <T, S extends Collection<T>> S transform(Iterable<T> input, IsCollectionStrategy<S, T> strategy) {
+        Validate.notNull(input);
+        Validate.notNull(strategy);
 
-	/**
-	 * Creates a new transformer.
-	 * @return new transformer
-	 */
-	static Iterable_To_Collection create(){
-		return new Iterable_To_Collection() {};
-	}
+        S ret = strategy.get();
+        for (T t : input) {
+            ret.add(t);
+        }
+        return ret;
+    }
 }

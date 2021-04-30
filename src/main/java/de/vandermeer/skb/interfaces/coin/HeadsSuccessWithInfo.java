@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,75 +15,75 @@
 
 package de.vandermeer.skb.interfaces.coin;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.vandermeer.skb.interfaces.messagesets.IsInfoSet;
 import de.vandermeer.skb.interfaces.render.DoesRender;
+import org.apache.commons.lang3.text.StrBuilder;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * A heads (success) coin with a value and further information.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.0.1
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.0.1
  */
 public interface HeadsSuccessWithInfo<R, M> extends HeadsSuccess<R>, IsInfoSet<M> {
 
-	@Override
-	default boolean reportsInfo(){
-		return true;
-	}
+    /**
+     * Creates a new success coin with given value and information.
+     *
+     * @param <R>   type of the return value
+     * @param <M>   the message type for the set
+     * @param value the actual return value
+     * @return new success coin
+     */
+    static <R, M> HeadsSuccessWithInfo<R, M> create(final R value) {
+        return new HeadsSuccessWithInfo<R, M>() {
+            final Set<M> infoSet = new LinkedHashSet<>();
 
-	@Override
-	default boolean hasInfoReports(){
-		return this.hasInformation();
-	}
+            @Override
+            public R getReturn() {
+                return value;
+            }
 
-	/**
-	 * Renders the info set.
-	 * The method uses {@link DoesRender} or simple toString to render infos.
-	 * Each element in the information set is rendered in a single line, preceded by the type (info).
-	 * @return rendered object
-	 */
-	@Override
-	default String render() {
-		StrBuilder ret = new StrBuilder(100);
-		for(M m : this.getInfoMessages()){
-			ret.append("info: ");
-			if(m instanceof DoesRender){
-				ret.append(((DoesRender)m).render());
-			}
-			else{
-				ret.append(m);
-			}
-			ret.appendNewLine();
-		}
-		return ret.toString();
-	}
+            @Override
+            public Set<M> getInfoMessages() {
+                return this.infoSet;
+            }
+        };
+    }
 
-	/**
-	 * Creates a new success coin with given value and information.
-	 * @param <R> type of the return value
-	 * @param <M> the message type for the set
-	 * @param value the actual return value
-	 * @return new success coin
-	 */
-	static <R, M> HeadsSuccessWithInfo<R, M> create(final R value){
-		return new HeadsSuccessWithInfo<R, M>() {
-			final Set<M> infoSet = new LinkedHashSet<>();
+    @Override
+    default boolean reportsInfo() {
+        return true;
+    }
 
-			@Override
-			public R getReturn() {
-				return value;
-			}
+    @Override
+    default boolean hasInfoReports() {
+        return this.hasInformation();
+    }
 
-			@Override
-			public Set<M> getInfoMessages() {
-				return this.infoSet;
-			}
-		};
-	}
+    /**
+     * Renders the info set.
+     * The method uses {@link DoesRender} or simple toString to render infos.
+     * Each element in the information set is rendered in a single line, preceded by the type (info).
+     *
+     * @return rendered object
+     */
+    @Override
+    default String render() {
+        StrBuilder ret = new StrBuilder(100);
+        for (M m : this.getInfoMessages()) {
+            ret.append("info: ");
+            if (m instanceof DoesRender) {
+                ret.append(((DoesRender) m).render());
+            } else {
+                ret.append(m);
+            }
+            ret.appendNewLine();
+        }
+        return ret.toString();
+    }
 }

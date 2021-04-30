@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,67 +20,67 @@ import de.vandermeer.asciithemes.TA_GridConfig;
 
 /**
  * Collection of {@link TA_Grid} for different extended ASCII characters.
- * 
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 170404 (04-Apr-17) for Java 1.8
- * @since      v0.0.1
+ *
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.1 build 170404 (04-Apr-17) for Java 1.8
+ * @since v0.0.1
  */
 public abstract class A8_Grids {
 
-	/**
-	 * A grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table).
-	 * 
-	 * ----
-	 * Normal         Strong         Heavy          Example
-	 * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
-	 *                                                h1    h2    h3    h4   
-	 * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ═════════════════════════
-	 *                                                c11 to c14 w/col-span  
-	 * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ─────────────────────────
-	 *                                                c21   c22   c23   c24  
-	 *                                              ─────────────────────────
-	 *                                                c31 - c32   c33 - c34  
-	 *                                              ═════════════════════════
-	 *                                                f1    f2    f3    f4   
-	 *                                              ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
-	 * ----
-	 * 
-	 * @return the grid
-	 */
-	public static TA_Grid lineDobuleTripple(){
-		return TA_Grid.create("grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table)")
-				.addCharacterMap(TA_GridConfig.RULESET_NORMAL, ' ', '─', ' ', '─', '─', '─', '─', '─', '─', '─', '─', '─')
-				.addCharacterMap(TA_GridConfig.RULESET_STRONG, ' ', '═', ' ', '═', '═', '═', '═', '═', '═', '═', '═', '═')
-				.addCharacterMap(TA_GridConfig.RULESET_HEAVY, ' ', '≡', ' ', '≡', '≡', '≡', '≡', '≡', '≡', '≡', '≡', '≡')
-		;
-	}
+    /**
+     * A grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table).
+     * <p>
+     * ----
+     * Normal         Strong         Heavy          Example
+     * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+     * h1    h2    h3    h4
+     * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ═════════════════════════
+     * c11 to c14 w/col-span
+     * ─────────      ═════════      ≡≡≡≡≡≡≡≡≡      ─────────────────────────
+     * c21   c22   c23   c24
+     * ─────────────────────────
+     * c31 - c32   c33 - c34
+     * ═════════════════════════
+     * f1    f2    f3    f4
+     * ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+     * ----
+     *
+     * @return the grid
+     */
+    public static TA_Grid lineDobuleTripple() {
+        return TA_Grid.create("grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table)")
+                .addCharacterMap(TA_GridConfig.RULESET_NORMAL, ' ', '─', ' ', '─', '─', '─', '─', '─', '─', '─', '─', '─')
+                .addCharacterMap(TA_GridConfig.RULESET_STRONG, ' ', '═', ' ', '═', '═', '═', '═', '═', '═', '═', '═', '═')
+                .addCharacterMap(TA_GridConfig.RULESET_HEAVY, ' ', '≡', ' ', '≡', '≡', '≡', '≡', '≡', '≡', '≡', '≡', '≡')
+                ;
+    }
 
-	/**
-	 * A grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table).
-	 * 
-	 * ----
-	 * Normal         Strong         Light          Heavy          Example
-	 * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-	 *                                                               h1    h2    h3    h4   
-	 * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-	 *                                                               c11 to c14 w/col-span  
-	 * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ═════════════════════════
-	 *                                                               c21   c22   c23   c24  
-	 *                                                             ─────────────────────────
-	 *                                                               c31 - c32   c33 - c34  
-	 *                                                             ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-	 *                                                               f1    f2    f3    f4   
-	 *                                                             ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-	 * ----
-	 * 
-	 * @return the grid
-	 */
-	public static TA_Grid lineDoubleBlocks(){
-		return TA_Grid.create("grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table)")
-				.addCharacterMap(TA_GridConfig.RULESET_NORMAL, ' ', '═', ' ', '═', '═', '═', '═', '═', '═', '═', '═', '═')
-				.addCharacterMap(TA_GridConfig.RULESET_STRONG, ' ', '▓', ' ', '▓', '▓', '▓', '▓', '▓', '▓', '▓', '▓', '▓')
-				.addCharacterMap(TA_GridConfig.RULESET_HEAVY, ' ', '▀', ' ', '▀', '▀', '▀', '▀', '▀', '▀', '▀', '▀', '▀')
-				.addCharacterMap(TA_GridConfig.RULESET_LIGHT, ' ', '─', ' ', '─', '─', '─', '─', '─', '─', '─', '─', '─')
-		;
-	}
+    /**
+     * A grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table).
+     * <p>
+     * ----
+     * Normal         Strong         Light          Heavy          Example
+     * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+     * h1    h2    h3    h4
+     * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+     * c11 to c14 w/col-span
+     * ═════════      ▓▓▓▓▓▓▓▓▓      ─────────      ▀▀▀▀▀▀▀▀▀      ═════════════════════════
+     * c21   c22   c23   c24
+     * ─────────────────────────
+     * c31 - c32   c33 - c34
+     * ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+     * f1    f2    f3    f4
+     * ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+     * ----
+     *
+     * @return the grid
+     */
+    public static TA_Grid lineDoubleBlocks() {
+        return TA_Grid.create("grid using normal, strong, and heavy extended ASCII characters for lines only (LaTeX style table)")
+                .addCharacterMap(TA_GridConfig.RULESET_NORMAL, ' ', '═', ' ', '═', '═', '═', '═', '═', '═', '═', '═', '═')
+                .addCharacterMap(TA_GridConfig.RULESET_STRONG, ' ', '▓', ' ', '▓', '▓', '▓', '▓', '▓', '▓', '▓', '▓', '▓')
+                .addCharacterMap(TA_GridConfig.RULESET_HEAVY, ' ', '▀', ' ', '▀', '▀', '▀', '▀', '▀', '▀', '▀', '▀', '▀')
+                .addCharacterMap(TA_GridConfig.RULESET_LIGHT, ' ', '─', ' ', '─', '─', '─', '─', '─', '─', '─', '─', '─')
+                ;
+    }
 }

@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,34 +18,38 @@ package de.vandermeer.skb.interfaces.application;
 /**
  * A category for an application error code.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.0.2
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.0.2
  */
 public interface ErrorCodeCategory {
 
-	/**
-	 * Returns the category display name.
-	 * @return display name
-	 */
-	String getDisplayName();
+    /**
+     * Returns the category display name.
+     *
+     * @return display name
+     */
+    String getDisplayName();
 
-	/**
-	 * Returns the category description.
-	 * @return category description
-	 */
-	String getDescription();
+    /**
+     * Returns the category description.
+     *
+     * @return category description
+     */
+    String getDescription();
 
-	/**
-	 * Returns the start of the error codes.
-	 * @return error code start
-	 */
-	int getStart();
+    /**
+     * Returns the start of the error codes.
+     *
+     * @return error code start
+     */
+    int getStart();
 
-	/**
-	 * Returns the end of the error codes.
-	 * @return error code end
-	 */
-	int getEnd();
+    /**
+     * Returns the end of the error codes.
+     *
+     * @return error code end
+     */
+    int getEnd();
 
 }

@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,33 +15,31 @@
 
 package de.vandermeer.skb.interfaces.strategies.maps.abstractmap;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import de.vandermeer.skb.interfaces.strategies.maps.abstractmap.LinkedHashMapStrategy;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link LinkedHashMapStrategy}.
  *
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.0.1
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.0.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.0.1
  */
 public class Test_LinkedHashMapStrategy {
 
-	@Test
-	public void test_LinkedHashMapStrategy(){
-		LinkedHashMapStrategy<String, String> hms= LinkedHashMapStrategy.create();
-		LinkedHashMapStrategy<String, Integer> hmi= LinkedHashMapStrategy.create();
+    @Test
+    public void test_LinkedHashMapStrategy() {
+        LinkedHashMapStrategy<String, String> hms = LinkedHashMapStrategy.create();
+        LinkedHashMapStrategy<String, Integer> hmi = LinkedHashMapStrategy.create();
 
-		Map<String, String> strings = hms.get();
-		Map<String, Integer> ints = hmi.get();
+        Map<String, String> strings = hms.get();
+        Map<String, Integer> ints = hmi.get();
 
-		assertTrue(strings instanceof LinkedHashMap);
-		assertTrue(ints instanceof LinkedHashMap);
-	}
+        assertTrue(strings instanceof LinkedHashMap);
+        assertTrue(ints instanceof LinkedHashMap);
+    }
 }

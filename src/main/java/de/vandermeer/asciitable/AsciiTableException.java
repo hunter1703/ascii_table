@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,37 +16,45 @@ package de.vandermeer.asciitable;
 
 /**
  * Standard exception for ASCII tables.
- * 
- * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.3.2 build 170502 (02-May-17) for Java 1.8
- * @since      v0.3.0
+ *
+ * @author Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
+ * @version v0.3.2 build 170502 (02-May-17) for Java 1.8
+ * @since v0.3.0
  */
 public class AsciiTableException extends RuntimeException {
-	/** UUID */
-	private static final long serialVersionUID = 1L;
+    /**
+     * UUID
+     */
+    private static final long serialVersionUID = 1L;
 
-	/** Standard message */
-	private static String msg = "unmanageable problem in AsciiTable";
+    /**
+     * Standard message
+     */
+    private static String msg = "unmanageable problem in AsciiTable";
 
-	/** Returns a new exception */
-	public AsciiTableException(){
-		super();
-	}
+    /**
+     * Returns a new exception
+     */
+    public AsciiTableException() {
+        super();
+    }
 
-	/**
-	 * Returns a new exception with given cause
-	 * @param cause exception cause
-	 */
-	public AsciiTableException(Throwable cause){
-		super(AsciiTableException.msg, cause);
-	}
+    /**
+     * Returns a new exception with given cause
+     *
+     * @param cause exception cause
+     */
+    public AsciiTableException(Throwable cause) {
+        super(AsciiTableException.msg, cause);
+    }
 
-	/**
-	 * Returns a new exception with given cause and message
-	 * @param msg exception message
-	 * @param cause exception cause
-	 */
-	public AsciiTableException(String msg, String cause){
-		super(msg, new Error(cause));
-	}
+    /**
+     * Returns a new exception with given cause and message
+     *
+     * @param msg   exception message
+     * @param cause exception cause
+     */
+    public AsciiTableException(String msg, String cause) {
+        super(msg, new Error(cause));
+    }
 }
