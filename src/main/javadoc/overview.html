@@ -1,0 +1,267 @@
+<html>
+	<body>
+
+		<p>
+			Set of translators for characters, HTML Elements, and their combinations.
+		</p>
+
+		<p>
+			This <a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">blog post</a> explains how to get UTF-8 support in the whole tool chain.
+			Updates will be at the <a href="here https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">SKB Wiki on UTF-8</a>.
+		</p>
+
+		<h3>The Problem</h3>
+			Today, as in 2016, UTF-8 should be standard when dealing with text.
+			However, there are (still, and probably for a long time to come) many use cases where non-UTF-8 text needs to be processed.
+			Some examples are
+
+			<ul>
+				<li>Text in databases or other sources might be using ASCII encoding and HTML entities,</li>
+				<li>Many text written for LaTeX is using 7-bit ASCII encoding with special commands for non-ASCII characters, and</li>
+				<li>Legacy HTML text might use HTML Entities rather than UTF-8 encoded characters.</li>
+			</ul>
+
+			<p>
+			When dealing with multiple targets (for instance LaTex, AsciiDoc, and HTML), character translation can become a nightmare.
+			When defining the format of a normative source, all source representations must be translated to the required target representations.
+			</p>
+
+			<p>
+			Those translations can be very tricky, since they might require many target-specific exceptions.
+			</p>
+
+		<h3>This Solution</h3>
+			<p>
+			Use the SKB data for character maps and HTML Elements (<a href="https://github.com/vdmeer/skb">SKB on Github</a>) plus the SKB DataTool (<a jref="https://github.com/vdmeer/skb-java-datatool"</a>DataTool on Github</a>) to generate several translators that (hopefully) will ease the translation problems described above.
+			The SKB data provides for character maps and HTML Element maps.
+			Those maps are then used by the SKB DataTool to generate several Java classes with pre-defined mappings for this package.
+			</p>
+
+			<p>
+			There are three assumptions to translate a normative text as source to a target: characters, text formatting, and a combination of both.
+			</p>
+
+			<h4>Characters Translations</h4>
+				<p>
+				We assume that all characters are written in UTF-8.
+				For instance, to write a German umlaut {@code ö} one would one simply write ö.
+				Those UTF-8 characters will need then to be translated to a proper target representation.
+				</p>
+
+				<p>
+				For any other UTF-8 bases target, the example {@code ö} will just be the same: ö.
+				If the target requires a different representation, we need to translate the {@code ö} to the target, e.g.:
+
+					<ul>
+						<li>for an ASCII 7-bit representation in LaTeX we need to translate it to {@code \"{o}}.</li>
+						<li>for an ASCII 7-bit representation in HTML we need to translate it to {@code &amp;ouml;}.</li>
+					</ul>
+				</p>
+
+				<p>
+				This package provides character translators for doing exactly that.
+				</p>
+
+			<h4>Text Formatting Translations</h4>
+				<p>
+				Beside characters, the normative text source should also include standard formatting of text, such as bold and italic.
+				Simple text markup languages (such as AsciiDoc) and LaTeX use tags that are very hard to parse.
+				HTML however uses formatting tags that can be easily parsed and translated.
+				</p>
+
+				<p>
+				For instance, to mark text as bold in HTML one would use {@code <b>} and {@code </b>}.
+				Using this HTML markup, we can write text for instance as follows:
+					<ul>
+						<li>for bold, write {@code <b>text in bold</b>} and translate it to LaTeX as {@code \textbf{text in bold}} and to AsciiDoc as {@code +text in bold+},</li>
+						<li>for italic, write {@code <i>text in italic</i>} and translate it to LaTeX as {@code \textit{text in italic}} and to AsciiDoc as {@code +text in italic+}.</li>
+					</ul>
+				</p>
+
+				<p>
+				This package provides translators for doing exactly that.
+				</p>
+
+
+			<h4>Combination of Character and Text Formatting Translations</h4>
+				<p>
+				When combining both, character and text formatting translations, a few special cases do apply.
+				If we would simply translate all characters from source to target we would lose the text formatting.
+				</p>
+
+				<p>
+				For instance, the text
+				<pre>
+	ä ö <b>ü</b>
+				</pre>
+
+				would be translated to LaTeX as
+				<pre>
+	\"{a} \"{o} \textlessb\textgreater\"{u}\textless/b\textgreater
+				</pre>
+				</p>
+
+				<p>
+				To keep the text formatting,
+				we first need to convert those formatting markups into a representation that is not picked up by the simple character translation (a temporary form),
+				then realize the character translation, and then translate the temporary form of the formatting markup to the target representation.
+				This package provides translators for doing exactly that, resulting in a translated text of:
+				<pre>
+	\"{a} \"{o} \textbf{\"{u}}
+				</pre>
+				</p>
+
+
+			<h4>Not everything will get translated</h4>
+				<p>
+				As mentioned above, the character and formatting translators are automatically generated.
+				While the data source (https://github.com/vdmeer/skb[SKB on Github]) defines quite a few translations, it also might (will) miss some required translations.
+				Over time, we hope that all required translations will be defined in the data source.
+				</p>
+
+
+
+		<h3>Features</h3>
+			<p>
+			This package provides three different types of translators, each providing different translation classes for different target:
+			<ul>
+				<li>Simple character translators,</li>
+				<li>Simple formatting translators (using HTML Elements), and</li>
+				<li>Combined translators.</li>
+			</ul>
+		</p>
+
+			<h4>Character Translators</h4>
+			<p>
+			Character translators all provide a method {@code translateCharacters(String input)} translating all source character representations found in {@code input} to a target representation.
+			The translations provided currently are:
+			<ul>
+				<li>Text to AsciiDoc,</li>
+				<li>Text to HTML,</li>
+				<li>Text to LaTeX,</li>
+				<li>HTML to AsciiDoc, and</li>
+				<li>HTML to LaTeX.</li>
+			</ul>
+			</p>
+
+
+			<h4>HTML Element (text formatting) Translators</h4>
+			<p>
+			HTML Element translators all provide methods for:
+			<ul>
+				<li>Translating a text to a temporary representation - {@code text2tmp(String input)},</li>
+				<li>Translating a temporary representation to a target representation - {@code tmp2target(String input)}, and</li>
+				<li>Directly translating from source to target - {@code translateHtmlElements(String input)}.</li>
+			</p>
+
+			<p>
+			The translations provided currently are:
+			<ul>
+				<li>Text to AsciiDoc,</li>
+				<li>Text to HTML, and</li>
+				<li>Text to LaTeX.</li>
+			</ul>
+			</p>
+
+
+			<h4>Combined Translators</h4>
+			<p>
+			Combined translators provide all methods from the two above described translator interaces plus a method for a combined translation called {@code translate(String input)}.
+			</p>
+			<p>
+			The translations provided currently are:
+			<ul>
+				<li>Text to AsciiDoc,</li>
+				<li>Text to HTML, and</li>
+				<li>Text to LaTeX.</li>
+			</ul>
+			</p>
+
+
+		<h3>Examples</h3>
+
+			<h4>Character Translations</h4>
+				<p>
+				The following code will take a given string with some UTF-8 characters and translate it to a number of targets.
+				The first line creates a UTF-8 string.
+				The following lines print out translations to AsciiDoc, HTML, and LaTeX.
+				</p>
+
+				<pre>{@code
+	String text = "ä ö ü Š β … € ™ ↔";
+	System.out.println(new Text2AsciiDoc().translateCharacters(text));
+	System.out.println(new Text2Html().translateCharacters(text));
+	System.out.println(new Text2Latex().translateCharacters(text));
+				}</pre>
+
+				<p>
+				The output of the example will be as follows.
+				Line one below shows the translation to AsciiDoc.
+				Line two shows the translation to HTML.
+				Line three shows the translation to LaTeX.
+				</p>
+
+				<pre>
+ä ö ü Š β … € ™ ↔
+&auml; &ouml; &uuml; &Scaron; &beta; &hellip; &euro; &trade; &harr;
+\"{a} \"{o} \"{u} \v{S} \beta {\dots} {\euro} {\texttrademark} \(\leftrightarrow{}\)
+				</pre>
+
+
+			<h4>HTML Element (text formatting) Translations</h4>
+				<p>
+				The following code will take a given string with some formatting (HTML Elements) and translate it to a number of targets.
+				The first line creates a string with HTML Elements used for formatting.
+				The following lines print out translations to AsciiDoc, HTML, and LaTeX.
+				</p>
+
+				<pre>{@code
+	String text = "<b>bold</b>, <i>italic</i>, H<sub>2</sub>O, x<sup>y</sup>";
+	System.out.println(new de.vandermeer.translation.helements.Text2AsciiDoc().translateHtmlElements(text));
+	System.out.println(new de.vandermeer.translation.helements.Text2Html().translateHtmlElements(text));
+	System.out.println(new de.vandermeer.translation.helements.Text2Latex().translateHtmlElements(text));
+				}</pre>
+
+				<p>
+				The output of the example will be as follows.
+				Line one below shows the translation to AsciiDoc.
+				Line two shows the translation to HTML.
+				Line three shows the translation to LaTeX.
+				</p>
+
+				<pre>
+	*bold*, _italic_, H_2O, x^y
+	<b>bold</b>, <i>italic</i>, H<sub>2</sub>O, x<sup>y</sup>
+	\textbf{bold}, \textit{italic}, H$_{2}$O, x$^{y}$
+				</pre>
+
+
+			<h4>Combined Translators</h4>
+				<p>
+				The following example will take a given string with character and formatting  and translate it to a number of targets.
+				The first line has the actual string with combined elements.
+				The following lines print out translations to AsciiDoc, HTML, and LaTeX.
+				</p>
+
+				<pre>{@code
+	String text = "<b>bold ä ö ü</b>, <i>italic Š β …</i>, €<sub>5</sub>O, ™<sup>↔</sup>";
+	System.out.println(new de.vandermeer.translation.combinations.Text2AsciiDoc().translate(text));
+	System.out.println(new de.vandermeer.translation.combinations.Text2Html().translate(text));
+	System.out.println(new de.vandermeer.translation.combinations.Text2Latex().translate(text));
+				}</pre>
+
+				<p>
+				The output of the example will be as follows.
+				Line one below shows the translation to AsciiDoc.
+				Line two shows the translation to HTML.
+				Line three shows the translation to LaTeX.
+				</p>
+
+				<pre>
+	*bold ä ö ü*, _italic Š β …_, €_5O, ™^↔
+	<b>bold &auml; &ouml; &uuml;</b>, <i>italic &Scaron; &beta; &hellip;</i>, &euro;<sub>5</sub>O, &trade;<sup>&harr;</sup>
+	\textbf{bold \"{a} \"{o} \"{u}}, \textit{italic \v{S} \beta {\dots}}, {\euro}$_{5}$O, {\texttrademark}$^{\(\leftrightarrow{}\)}$
+				</pre>
+
+	</body>
+</html>
